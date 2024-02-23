@@ -71,6 +71,9 @@ test = [
     "pytest-benchmark",
     "pytest-cov",
 ]
+dev = [
+    "xmlschema",
+]
 
 [project.scripts]
 xsdata = "xsdata.__main__:main"
