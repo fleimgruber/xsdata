@@ -48,6 +48,14 @@ class CliTests(TestCase):
         self.assertEqual(StructureStyle.FILENAMES, config.output.structure_style)
         self.assertEqual([source.as_uri()], mock_process.call_args[0][0])
 
+    @mock.patch.object(ResourceTransformer, "__init__", return_value=None)
+    def test_generate_non_existent_source(self, mock_init):
+        source = fixtures_dir.joinpath("non-existent.xsd")
+        result = self.runner.invoke(cli, [str(source), "--package", "foo"])
+
+        print(result.output)
+        print(result.stdout)
+
     @mock.patch.object(ResourceTransformer, "process")
     @mock.patch.object(ResourceTransformer, "__init__", return_value=None)
     def test_generate_with_configuration_file(self, mock_init, mock_process):
